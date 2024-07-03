@@ -21,16 +21,16 @@ namespace INNOBRA_ASP.DB.Data.Entity
         [Required(ErrorMessage = "Los costo de las horas hombre son obligatorios.")]
         public decimal CostoHorasHombre { get; set; }
 
-        public List<ActividadEmpleado> ActividadEmpleados { get; set; }
+        //public List<ActividadEmpleado> ActividadEmpleados { get; set; }
 
         [Required(ErrorMessage = "Los costos de las horas maquina son obligatorios.")]
         public decimal CostoHorasMaquina { get; set; }
-        public List<ActividadMaquinaria> ActividadMaquinarias { get; set; }
+        //public List<ActividadMaquinaria> ActividadMaquinarias { get; set; }
 
         [Required(ErrorMessage = "Los costos totales de los materiales son obligatorios.")]
         public decimal CostoTotalMateriales { get; set; }
 
-        public List<ActividadMaterial> ActividadMateriales { get; set; }
+        //public List<ActividadMaterial> ActividadMateriales { get; set; }
 
         [Required(ErrorMessage = "El Id es obligatorio.")]
         public int FaseId { get; set; }

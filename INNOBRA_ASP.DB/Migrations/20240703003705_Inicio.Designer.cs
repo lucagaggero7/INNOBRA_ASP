@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace INNOBRA_ASP.DB.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240702073244_Inicio")]
+    [Migration("20240703003705_Inicio")]
     partial class Inicio
     {
         /// <inheritdoc />
@@ -79,9 +79,6 @@ namespace INNOBRA_ASP.DB.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ActividadId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("CostoHora")
                         .HasColumnType("decimal(18,2)");
 
@@ -92,8 +89,6 @@ namespace INNOBRA_ASP.DB.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ActividadId");
 
                     b.HasIndex("EmpleadoId");
 
@@ -108,9 +103,6 @@ namespace INNOBRA_ASP.DB.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ActividadId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("CostoHora")
                         .HasColumnType("decimal(18,2)");
 
@@ -121,8 +113,6 @@ namespace INNOBRA_ASP.DB.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ActividadId");
 
                     b.HasIndex("MaquinariaId");
 
@@ -137,9 +127,6 @@ namespace INNOBRA_ASP.DB.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ActividadId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
@@ -150,8 +137,6 @@ namespace INNOBRA_ASP.DB.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ActividadId");
 
                     b.HasIndex("MaterialId");
 
@@ -289,10 +274,6 @@ namespace INNOBRA_ASP.DB.Migrations
 
             modelBuilder.Entity("INNOBRA_ASP.DB.Data.Entity.ActividadEmpleado", b =>
                 {
-                    b.HasOne("INNOBRA_ASP.DB.Data.Entity.Actividad", null)
-                        .WithMany("ActividadEmpleados")
-                        .HasForeignKey("ActividadId");
-
                     b.HasOne("INNOBRA_ASP.DB.Data.Entity.Empleado", "Empleado")
                         .WithMany("ActividadEmpleados")
                         .HasForeignKey("EmpleadoId")
@@ -304,10 +285,6 @@ namespace INNOBRA_ASP.DB.Migrations
 
             modelBuilder.Entity("INNOBRA_ASP.DB.Data.Entity.ActividadMaquinaria", b =>
                 {
-                    b.HasOne("INNOBRA_ASP.DB.Data.Entity.Actividad", null)
-                        .WithMany("ActividadMaquinarias")
-                        .HasForeignKey("ActividadId");
-
                     b.HasOne("INNOBRA_ASP.DB.Data.Entity.Maquinaria", "Maquinaria")
                         .WithMany("ActividadMaquinarias")
                         .HasForeignKey("MaquinariaId")
@@ -319,10 +296,6 @@ namespace INNOBRA_ASP.DB.Migrations
 
             modelBuilder.Entity("INNOBRA_ASP.DB.Data.Entity.ActividadMaterial", b =>
                 {
-                    b.HasOne("INNOBRA_ASP.DB.Data.Entity.Actividad", null)
-                        .WithMany("ActividadMateriales")
-                        .HasForeignKey("ActividadId");
-
                     b.HasOne("INNOBRA_ASP.DB.Data.Entity.Material", "Material")
                         .WithMany("ActividadMateriales")
                         .HasForeignKey("MaterialId")
@@ -341,15 +314,6 @@ namespace INNOBRA_ASP.DB.Migrations
                         .IsRequired();
 
                     b.Navigation("Proyecto");
-                });
-
-            modelBuilder.Entity("INNOBRA_ASP.DB.Data.Entity.Actividad", b =>
-                {
-                    b.Navigation("ActividadEmpleados");
-
-                    b.Navigation("ActividadMaquinarias");
-
-                    b.Navigation("ActividadMateriales");
                 });
 
             modelBuilder.Entity("INNOBRA_ASP.DB.Data.Entity.Empleado", b =>

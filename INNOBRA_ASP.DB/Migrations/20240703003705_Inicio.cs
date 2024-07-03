@@ -70,6 +70,69 @@ namespace INNOBRA_ASP.DB.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ActividadEmpleados",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    HorasTrabajadas = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CostoHora = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    EmpleadoId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ActividadEmpleados", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ActividadEmpleados_Empleados_EmpleadoId",
+                        column: x => x.EmpleadoId,
+                        principalTable: "Empleados",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ActividadMaquinarias",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    HorasUtilizadas = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CostoHora = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MaquinariaId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ActividadMaquinarias", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ActividadMaquinarias_Maquinarias_MaquinariaId",
+                        column: x => x.MaquinariaId,
+                        principalTable: "Maquinarias",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ActividadMateriales",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Cantidad = table.Column<int>(type: "int", nullable: false),
+                    CostoTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MaterialId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ActividadMateriales", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ActividadMateriales_Materiales_MaterialId",
+                        column: x => x.MaterialId,
+                        principalTable: "Materiales",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Fases",
                 columns: table => new
                 {
@@ -120,92 +183,6 @@ namespace INNOBRA_ASP.DB.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "ActividadEmpleados",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    HorasTrabajadas = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    CostoHora = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    EmpleadoId = table.Column<int>(type: "int", nullable: false),
-                    ActividadId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ActividadEmpleados", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ActividadEmpleados_Actividades_ActividadId",
-                        column: x => x.ActividadId,
-                        principalTable: "Actividades",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ActividadEmpleados_Empleados_EmpleadoId",
-                        column: x => x.EmpleadoId,
-                        principalTable: "Empleados",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ActividadMaquinarias",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    HorasUtilizadas = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    CostoHora = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    MaquinariaId = table.Column<int>(type: "int", nullable: false),
-                    ActividadId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ActividadMaquinarias", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ActividadMaquinarias_Actividades_ActividadId",
-                        column: x => x.ActividadId,
-                        principalTable: "Actividades",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ActividadMaquinarias_Maquinarias_MaquinariaId",
-                        column: x => x.MaquinariaId,
-                        principalTable: "Maquinarias",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ActividadMateriales",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Cantidad = table.Column<int>(type: "int", nullable: false),
-                    CostoTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    MaterialId = table.Column<int>(type: "int", nullable: false),
-                    ActividadId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ActividadMateriales", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ActividadMateriales_Actividades_ActividadId",
-                        column: x => x.ActividadId,
-                        principalTable: "Actividades",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ActividadMateriales_Materiales_MaterialId",
-                        column: x => x.MaterialId,
-                        principalTable: "Materiales",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ActividadEmpleados_ActividadId",
-                table: "ActividadEmpleados",
-                column: "ActividadId");
-
             migrationBuilder.CreateIndex(
                 name: "IX_ActividadEmpleados_EmpleadoId",
                 table: "ActividadEmpleados",
@@ -217,19 +194,9 @@ namespace INNOBRA_ASP.DB.Migrations
                 column: "FaseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ActividadMaquinarias_ActividadId",
-                table: "ActividadMaquinarias",
-                column: "ActividadId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ActividadMaquinarias_MaquinariaId",
                 table: "ActividadMaquinarias",
                 column: "MaquinariaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ActividadMateriales_ActividadId",
-                table: "ActividadMateriales",
-                column: "ActividadId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ActividadMateriales_MaterialId",
@@ -249,6 +216,9 @@ namespace INNOBRA_ASP.DB.Migrations
                 name: "ActividadEmpleados");
 
             migrationBuilder.DropTable(
+                name: "Actividades");
+
+            migrationBuilder.DropTable(
                 name: "ActividadMaquinarias");
 
             migrationBuilder.DropTable(
@@ -258,16 +228,13 @@ namespace INNOBRA_ASP.DB.Migrations
                 name: "Empleados");
 
             migrationBuilder.DropTable(
+                name: "Fases");
+
+            migrationBuilder.DropTable(
                 name: "Maquinarias");
 
             migrationBuilder.DropTable(
-                name: "Actividades");
-
-            migrationBuilder.DropTable(
                 name: "Materiales");
-
-            migrationBuilder.DropTable(
-                name: "Fases");
 
             migrationBuilder.DropTable(
                 name: "Proyectos");
